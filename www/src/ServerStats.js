@@ -6,7 +6,9 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.refresh = this.refresh.bind(this);
+    this.renderCompactView = this.renderCompactView.bind(this);
     this.renderStatus = this.renderStatus.bind(this);
+    this.renderWideView = this.renderWideView.bind(this);
     this.state = {
       loading: true,
       stats: {}
@@ -47,13 +49,97 @@ export default class App extends React.Component {
       );
     } else {
       return (
-        <div className="d-inline-block alert alert-danger text-left shadow-sm">
-          <span className="circle py-1 px-2 mr-2 bg-danger text-white">✖︎</span>
-          <strong className="text-danger">Offline</strong>
+        <div>
+          <div className="d-inline-block alert alert-danger text-left shadow-sm">
+            <span className="circle py-1 px-2 mr-2 bg-danger text-white">✖︎</span>
+            <strong className="text-danger">Offline</strong>
+          </div>
         </div>
       );
     }
   }
+
+  renderCompactView() {
+    const {stats} = this.state;
+    return (
+      <div className="d-sm-none">
+        <div className="row d-sm-none">
+          <div className="col">
+            <div className="text-center">
+              <div className="h1 my-1 text-shadow">minecraft.glompix.com</div>
+              <div className="d-flex justify-content-center">
+                <div className="mr-1">{stats.server.name}</div>
+                <div className="ml-1">motd: {stats.motd}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="row mt-4 d-sm-none">
+          <div className="col">
+            <div className="d-flex justify-content-center">
+              <img
+                src="apple-touch-icon.png"
+                className="shadow-sm rounded mr-3"
+                style={{
+                  height: '96px'
+                }}
+                alt="server icon"/> {this.renderStatus()}
+            </div>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col text-center">
+            <div className="small">
+              <i>Updated: {moment.unix(stats.last_updated).format('lll')}</i>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  renderWideView() {
+    const {stats} = this.state;
+    return (
+      <div className="d-none d-sm-block">
+        <div className="row clearfix">
+          <div className="col">
+            <div className="d-flex float-right">
+              <img
+                src="apple-touch-icon.png"
+                className="shadow-sm rounded mr-4"
+                style={{
+                  height: '96px'
+                }}
+                alt="server icon"/>
+              <div className="align-self-center">
+                <div className="h1 my-1 text-shadow">minecraft.glompix.com</div>
+                <div className="d-flex justify-content-between">
+                  <div>{stats.server.name}</div>
+                  <div>motd: {stats.motd}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="row mt-4">
+          <div className="col">
+            <div className="text-right">
+              {this.renderStatus()}
+            </div>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col text-right">
+            <div className="small">
+              <i>Updated: {moment.unix(stats.last_updated).format('lll')}</i>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   render() {
     const {loading, stats} = this.state;
     const {error} = stats;
@@ -67,27 +153,9 @@ export default class App extends React.Component {
     }
 
     return (
-      <div className="text-right">
-        <div className="d-flex justify-content-end">
-          <img
-            src="apple-touch-icon.png"
-            className="shadow-sm rounded"
-            style={{
-              height: '96px'
-            }}
-            alt="server icon"/>
-          <div className="pl-3">
-            <div className="h1 my-1 text-shadow">minecraft.glompix.com</div>
-            <div className="d-flex justify-content-between">
-              <div>{stats.server.name}</div>
-              <div>motd: {stats.motd}</div>
-            </div>
-          </div>
-        </div>
-        <div className="mt-4">{this.renderStatus()}</div>
-        <div className="small">
-          <i>Updated: {moment.unix(stats.last_updated).format('lll')}</i>
-        </div>
+      <div className="container-fluid">
+        {this.renderWideView()}
+        {this.renderCompactView()}
       </div>
     );
   }
