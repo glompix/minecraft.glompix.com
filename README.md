@@ -1,4 +1,4 @@
-# glompix.minecraft.com
+# minecraft.glompix.com
 
 get out mom i'm on minecraft!!1
 
