@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>minecraft.glompix.com</title>
+  <meta property="og:title" content="minecraft.glompix.com" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="http://minecraft.glompix.com" />
+  <meta property="og:image" content="http://minecraft.glompix.com/background.jpg" />
+  <style type="text/css">
+    body {
+      background: #000 url('background.png') no-repeat right 5%;
+      background-size: cover;
+      font-family: "Helvetica Neue", "Arial", sans-serif;
+      text-align: right;
+      padding: 32px;
+      margin: 0;
+    }
+    h1 {
+      font-size: 300%;
+      margin: 0; padding: 0;
+    }
+    a {
+      color: #444;
+    }
+  </style>
+  </head>
+
+<body>
+  <h1>minecraft.glompix.com</h1>
+  <p>1.14 - survival - <a href="mailto:glompix@gmail.com">glompix@gmail.com</a></p>
+  <script src="https://mcapi.us/scripts/minecraft.js"></script>
+  <script>
+    MinecraftAPI.getServerStatus('minecraft.glompix.com', {}, function (err, status) {
+        if (err) {
+          return document.querySelector('.server-status').innerHTML = 'Error loading status';
+        }
+
+        // you can change these to your own message!
+        document.querySelector('.server-online').innerHTML = status.online ? 'up' : 'down';
+      });
+  </script>
+</body>
+
+</html>
