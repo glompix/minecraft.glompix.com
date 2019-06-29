@@ -9,32 +9,11 @@ html {
 body {
   margin: 2rem;
   padding: 0;
+  background: transparent;
 }
-header {
-  text-align: right;
-  font-size: 125%;
+.text-shadow {
+  text-shadow: rgba(0,0,0,.3) 0rem .125rem .125rem !important;
 }
-
-h1 {
-  margin: 0; padding: 0;
-}
-a {
-  color: #E55C9C;
-}
-.stats-block div {
-  margin: .5rem 0;
-}
-
-.mx-1 {
-  margin-left: 4px;
-  margin-right: 4px;
-}
-.mt-2 {
-  margin-top: 0.5rem !important;
-}
-.mt-4 {
-  margin-top: 1.5rem !important;
-}
-.text-small {
-  font-size: 75% !important;
+.circle {
+  border-radius: 1em;
 }
